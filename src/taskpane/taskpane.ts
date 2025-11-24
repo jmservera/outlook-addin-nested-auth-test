@@ -21,23 +21,6 @@ var itemConversationId: string;
 
 Office.onReady((info) => {
   switch (info.host) {
-    case Office.HostType.Excel:
-    case Office.HostType.PowerPoint:
-    case Office.HostType.Word:
-      if (sideloadMsg) {
-        sideloadMsg.style.display = "none";
-      }
-      if (appBody) {
-        appBody.style.display = "flex";
-      }
-      if (getUserDataButton) {
-        getUserDataButton.onclick = getUserData;
-      }
-      if (getEmailThreadButton) {
-        getEmailThreadButton.onclick = getEmailThread;
-      }
-      accountManager.initialize();
-      break;
     case Office.HostType.Outlook: {
       if (sideloadMsg) {
         sideloadMsg.style.display = "none";
@@ -52,13 +35,26 @@ Office.onReady((info) => {
         getEmailThreadButton.onclick = getEmailThread;
       }
       accountManager.initialize();
-
       const item = Office.context.mailbox.item;
       if (item) {
         itemConversationId = item.conversationId;
       }
       break;
     }
+    case Office.HostType.Excel:
+    case Office.HostType.PowerPoint:
+    case Office.HostType.Word:
+      if (sideloadMsg) {
+        sideloadMsg.style.display = "none";
+      }
+      if (appBody) {
+        appBody.style.display = "flex";
+      }
+      if (getUserDataButton) {
+        getUserDataButton.onclick = getUserData;
+      }
+      accountManager.initialize();
+      break;
   }
 });
 
