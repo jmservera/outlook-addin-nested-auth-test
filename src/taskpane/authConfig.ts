@@ -7,9 +7,16 @@
 
 import { createNestablePublicClientApplication, type IPublicClientApplication } from "@azure/msal-browser";
 
+// Declare environment variable type
+declare const process: {
+  env: {
+    APPLICATION_ID?: string;
+  };
+};
+
 export { AccountManager };
 
-const applicationId = "";
+const applicationId = process.env.APPLICATION_ID || "";
 
 const msalConfig = {
   auth: {
